@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('servicos', function (Blueprint $table) {
-            $table->id(); // chave primária padrão
+            $table->id();
             $table->string('nome');
-            $table->string('tipo'); // Ex: Exame, Procedimento, Consulta Especial
+            $table->enum('tipo', ['Exame', 'Procedimento', 'Consulta Especial'])->default('Exame');
             $table->timestamps();
         });
     }
@@ -21,4 +21,3 @@ return new class extends Migration
         Schema::dropIfExists('servicos');
     }
 };
-
