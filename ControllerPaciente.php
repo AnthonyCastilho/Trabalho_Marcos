@@ -11,7 +11,7 @@ class ControllerPaciente extends Controller
     public readonly pacienteModel $paciente;
     
     public function __construct(){
-        $this->cliente = new pacienteModel();
+        $this->paciente = new pacienteModel();
 
     }
     public function index(){
