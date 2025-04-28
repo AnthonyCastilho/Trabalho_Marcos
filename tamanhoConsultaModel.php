@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class tamanhoModel extends Model
+class TamanhoModel extends Model
 {
     protected $table = "tamanhos";
     protected $fillable = ['descricao', 'preco_extra'];
 
-    public function pedidoPizzas()
+    public function pedidosConsultas()
     {
-        return $this->hasMany(pizzaModel::class);
+        return $this->hasMany(PedidoConsulta::class);
     }
+
 }
