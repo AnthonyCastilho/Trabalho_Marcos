@@ -9,31 +9,24 @@ use Illuminate\Http\Request;
 
 class ControllerAgendamento extends Controller
 {
-    public readonly Servico $servico;
-    
-    public function __construct()
-    {
-        $this->servico = new Servico();
-    }
-
     public function index()
     {
-        $Pacientes = Paciente::all();
+        $pacientes = Paciente::all();
         $servicos = Servico::all();
-    
+
         return view('agendamentos.index', [
-            'Pacientes' => $Pacientes,
+            'pacientes' => $pacientes,
             'servicos' => $servicos
         ]);
     }
 
     public function create()
     {
-        $Pacientes = Paciente::all();
+        $pacientes = Paciente::all();
         $servicos = Servico::all();
 
         return view('agendamentos.create', [
-            'Pacientes' => $pacientes,
+            'pacientes' => $pacientes,
             'servicos' => $servicos
         ]);
     }
@@ -61,12 +54,14 @@ class ControllerAgendamento extends Controller
     public function edit($id)
     {
         $agendamento = Agendamento::findOrFail($id);
+        
         return view('agendamentos.edit', compact('agendamento'));
     }
 
     public function update(Request $request, $id)
     {
         $agendamento = Agendamento::findOrFail($id);
+
         $agendamento->update([
             'status' => $request->status,
         ]);
@@ -77,6 +72,7 @@ class ControllerAgendamento extends Controller
     public function destroy($id)
     {
         $agendamento = Agendamento::findOrFail($id);
+        
         $agendamento->delete();
     
         return redirect()->route('agendamentos.index')->with('success', 'Agendamento excluído com sucesso!');
