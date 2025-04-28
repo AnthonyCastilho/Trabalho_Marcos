@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('agendamento_servicos', function (Blueprint $table) {
+        Schema::create('agendamentos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('agendamento_id')->constrained('agendamentos')->onDelete('cascade');
+            $table->foreignId('paciente_id')->constrained('pacientes')->onDelete('cascade');
             $table->foreignId('especialidade_id')->constrained('especialidades')->onDelete('cascade');
-            $table->foreignId('plano_id')->constrained('planos')->onDelete('cascade');
-            $table->integer('quantidade')->default(1);
+            $table->dateTime('data_agendamento');
+            $table->enum('status', ['Agendado', 'Confirmado', 'Realizado', 'Cancelado'])->default('Agendado');
+            $table->decimal('valor_consulta', 8, 2)->default(0);
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('agendamento_servicos');
+        Schema::dropIfExists('agendamentos');
     }
 };
