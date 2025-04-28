@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('agendamento_servicos', function (Blueprint $table) {
@@ -17,13 +14,13 @@ return new class extends Migration
             $table->foreignId('especialidade_id')->constrained('especialidades')->onDelete('cascade');
             $table->foreignId('plano_id')->constrained('planos')->onDelete('cascade');
             $table->integer('quantidade')->default(1);
+
+            $table->unique(['agendamento_id', 'especialidade_id', 'plano_id']);
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('agendamento_servicos');
