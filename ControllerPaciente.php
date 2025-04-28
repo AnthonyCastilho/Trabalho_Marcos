@@ -18,7 +18,6 @@ class ControllerPaciente extends Controller
         $paciente_=$this->paciente->all();
         return view('pacienteIndex',['paciente_tb'=>$paciente_]);
     
-        // return view('animais');
         }
 
     public function create()
