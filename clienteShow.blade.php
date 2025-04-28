@@ -19,8 +19,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="telefone" class="form-label">Endereço:</label>
-            <input type="text" name="telefone" id="endereco" class="form-control" value="{{ $paciente->endereco}}">
+            <label for="endereco" class="form-label">Endereço:</label>
+            <input type="text" name="endereco" id="endereco" class="form-control" value="{{ $paciente->endereco }}">
         </div>
 
         <button type="submit" class="btn btn-primary">Atualizar</button>
