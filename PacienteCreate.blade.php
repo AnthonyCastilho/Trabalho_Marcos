@@ -4,7 +4,7 @@
 <div class="container">
     <h2>Novo Cliente</h2>
 
-    <form action="{{ route('cliente.store') }}" method="POST">
+    <form action="{{ route('paciente.store') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="nome" class="form-label">Nome:</label>
