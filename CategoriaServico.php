@@ -1,3 +1,5 @@
+<?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,6 +11,7 @@ class CategoriaServico extends Model
 
     protected $fillable = ['descricao'];
 
+    public function servicos()
     {
         return $this->hasMany(Servico::class);
     }
