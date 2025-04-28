@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class clienteModel  extends Model
+class pacienteModel  extends Model
 {
-    protected $table = "clientes";
+    protected $table = "pacientes";
     protected $fillable = ['nome', 'telefone', 'endereco'];
 
     public function pedidos()
