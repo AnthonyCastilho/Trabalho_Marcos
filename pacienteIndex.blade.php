@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-    <h2>Lista de Clientes</h2>
+    <h2>Lista de Pacientes</h2>
 
-    <a href="{{ route('cliente.create') }}" class="btn btn-success mb-3">Novo Cliente</a>
+    <a href="{{ route('paciente.create') }}" class="btn btn-success mb-3">Novo Paciente</a>
 
 
         <table class="table table-bordered table-striped">
@@ -17,15 +17,15 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($cliente_tb as $cliente)
+                @foreach ($paciente_tb as $paciente)
                     <tr>
-                        <td>{{ $cliente->id }}</td>
-                        <td>{{ $cliente->nome }}</td>
-                        <td>{{ $cliente->telefone }}</td>
+                        <td>{{ $paciente->id }}</td>
+                        <td>{{ $paciente->nome }}</td>
+                        <td>{{ $paciente->telefone }}</td>
                         <td>
-                            <a href="{{ route('cliente.edit', $cliente->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                            <form action="{{ route('cliente.destroy', $cliente->id) }}" method="POST" class="d-inline"
-                                  onsubmit="return confirm('Tem certeza que deseja excluir este cliente?');">
+                            <a href="{{ route('paciente.edit', $paciente->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                            <form action="{{ route('paciente.destroy', $paciente->id) }}" method="POST" class="d-inline"
+                                  onsubmit="return confirm('Tem certeza que deseja excluir este paciente?');">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm">Excluir</button>
