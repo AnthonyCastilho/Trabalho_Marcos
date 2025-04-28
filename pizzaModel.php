@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class pizzaModel extends Model
+class lancheModel extends Model
 {
-    protected $table = 'pizzas';
+    protected $table = 'lanches';
 
     protected $fillable = ['nome', 'descricao', 'preco_base'];
 
 
-    public function pedidoPizzas()
+    public function pedidoLanches()
     {
-        return $this->hasMany(pizzaModel::class);
+        return $this->hasMany(lancheModel::class);
     }
 }
 
