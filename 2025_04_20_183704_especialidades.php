@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pedidos', function (Blueprint $table) {
+        Schema::create('especialidades', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cliente_id')->constrained()->onDelete('cascade');
-            $table->dateTime('data_pedido');
-            $table->enum('status', ['Aguardando', 'Preparando', 'Entregue'])->default('Aguardando');
-            $table->decimal('valor_total', 8, 2)->default(0);
+            $table->string('nome');
+            $table->text('descricao')->nullable();
+            $table->decimal('valor_consulta_base', 8, 2); // valor base da consulta para essa especialidade
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('especialidades');
     }
 };
