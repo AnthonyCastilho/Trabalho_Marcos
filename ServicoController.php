@@ -26,7 +26,14 @@ class EspecialidadeController extends Controller
         ]);
 
         EspecialidadeModel::create($request->all());
+
         return redirect()->route('especialidade.index')->with('success', 'Especialidade criada com sucesso!');
+    }
+
+    public function edit($id)
+    {
+        $especialidade = EspecialidadeModel::findOrFail($id);
+        return view('especialidade.edit', compact('especialidade'));
     }
 
     public function update(Request $request, $id)
@@ -38,13 +45,17 @@ class EspecialidadeController extends Controller
 
         $especialidade = EspecialidadeModel::findOrFail($id);
         $especialidade->update($request->all());
+
         return redirect()->route('especialidade.index')->with('success', 'Especialidade atualizada com sucesso!');
     }
 
     public function destroy($id)
     {
         $especialidade = EspecialidadeModel::findOrFail($id);
+
         $especialidade->delete();
+
         return redirect()->route('especialidade.index')->with('success', 'Especialidade removida com sucesso!');
     }
 }
+
