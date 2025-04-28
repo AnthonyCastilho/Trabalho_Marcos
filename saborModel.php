@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class saborModel extends Model
+class Especialidade extends Model
 {
-    protected $table = 'sabor';
+    protected $table = 'especialidades';
     protected $fillable = ['nome', 'tipo'];
 
-    public function pizzas()
+    public function medicos()
     {
-        return $this->belongsToMany(related: pizzaModel::class);
+        return $this->belongsToMany(Medico::class);
     }
 }
 
