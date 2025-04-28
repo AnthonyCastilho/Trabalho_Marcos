@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class pacienteModel  extends Model
+class Paciente extends Model
 {
     protected $table = "pacientes";
+
     protected $fillable = ['nome', 'telefone', 'endereco'];
 
-    public function pedidos()
+    public function agendamentos()
     {
-        return $this->hasMany(PedidoModel::class);
+        return $this->hasMany(Agendamento::class, 'paciente_id');
     }
 }
-
 
