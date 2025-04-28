@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tamanhos', function (Blueprint $table) {
             $table->id();
-            $table->string('descricao'); // Ex: Pequena, Média, Grande
+            $table->string('descricao'); // Ex: Adulto, Infantil
             $table->decimal('preco_extra', 4, 2); // Ex: 1.00, 1.25, 1.50 para multiplicar o preco_base
             $table->timestamps();
         });
