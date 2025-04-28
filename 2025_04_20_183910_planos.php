@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tamanhos', function (Blueprint $table) {
+        Schema::create('planos', function (Blueprint $table) {
             $table->id();
-            $table->string('descricao'); // Ex: Adulto, Infantil
-            $table->decimal('preco_extra', 4, 2); // Ex: 1.00, 1.25, 1.50 para multiplicar o preco_base
+            $table->string('descricao'); // Ex: Particular, Convênio
+            $table->decimal('acrescimo_valor', 4, 2)->default(1.00); // multiplicador sobre valor base da especialidade
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('planos');
     }
 };
