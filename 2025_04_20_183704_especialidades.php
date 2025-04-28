@@ -6,23 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('especialidades', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
+            $table->string('nome', 255);
             $table->text('descricao')->nullable();
-            $table->decimal('valor_consulta_base', 8, 2); // valor base da consulta para essa especialidade
+            $table->decimal('valor_consulta_base', 8, 2)->check('valor_consulta_base >= 0');
             $table->timestamps();
+            
+            $table->index('nome'); 
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('especialidades');
