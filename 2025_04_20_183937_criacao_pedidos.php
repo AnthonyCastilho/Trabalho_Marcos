@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pedido_pizzas', function (Blueprint $table) {
+        Schema::create('agendamento_servicos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pedido_id')->constrained()->onDelete('cascade');
-            $table->foreignId('pizza_id')->constrained()->onDelete('cascade');
-            $table->foreignId('tamanho_id')->constrained()->onDelete('cascade');
+            $table->foreignId('agendamento_id')->constrained('agendamentos')->onDelete('cascade');
+            $table->foreignId('especialidade_id')->constrained('especialidades')->onDelete('cascade');
+            $table->foreignId('plano_id')->constrained('planos')->onDelete('cascade');
             $table->integer('quantidade')->default(1);
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('agendamento_servicos');
     }
 };
