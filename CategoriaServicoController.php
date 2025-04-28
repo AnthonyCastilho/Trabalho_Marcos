@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CategoriaServicoController extends Controller
 {
+    protected function findCategoriaServico($id)
+    {
+        return CategoriaServico::findOrFail($id);
+    }
+
     public function index()
     {
         $categorias = CategoriaServico::all();
@@ -24,7 +29,7 @@ class CategoriaServicoController extends Controller
             'descricao' => 'required|string|max:255',
         ]);
 
-        CategoriaServico::create($request->all());
+        CategoriaServico::create($request->only('descricao'));
         return redirect()->route('categorias.index');
     }
 
@@ -34,16 +39,20 @@ class CategoriaServicoController extends Controller
             'descricao' => 'required|string|max:255',
         ]);
 
-        $categoria = CategoriaServico::findOrFail($id);
-        $categoria->update($request->all());
+        $categoria = $this->findCategoriaServico($id);
+        $categoria->update($request->only('descricao'));
         return redirect()->route('categorias.index');
     }
 
     public function destroy($id)
     {
-        $categoria = CategoriaServico::findOrFail($id);
+        $categoria = $this->findCategoriaServico($id);
+        
+        if ($categoria->servicos()->count() > 0) {
+            return redirect()->route('categorias.index')->with('error', 'Não é possível excluir a categoria, pois ela está associada a serviços.');
+        }
+
         $categoria->delete();
         return redirect()->route('categorias.index');
     }
 }
-
