@@ -4,16 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class lancheModel extends Model
+class Especialidade extends Model
 {
-    protected $table = 'lanches';
+    protected $table = 'especialidades';
+    protected $fillable = ['nome', 'descricao'];
 
-    protected $fillable = ['nome', 'descricao', 'preco_base'];
-
-
-    public function pedidoLanches()
+    public function medicos()
     {
-        return $this->hasMany(lancheModel::class);
+        return $this->hasMany(Medico::class, 'especialidade_id');
     }
 }
 
