@@ -2,55 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PizzaModel;
-use App\Models\PizzaModelModel;
+use App\Models\EspecialidadeModel;
 use Illuminate\Http\Request;
 
-class PizzaController extends Controller
+class EspecialidadeController extends Controller
 {
-    // Exibir lista de PizzaModels
+    // Exibir lista de Especialidades
     public function index()
     {
-        $pizza = PizzaModel::all();
-        return view('pizzaIndex', compact('pizza'));
+        $especialidades = EspecialidadeModel::all();
+        return view('especialidade.index', compact('especialidades'));
     }
 
-    // Exibir formulário para criação de nova PizzaModelModel
+    // Exibir formulário para criação de nova Especialidade
     public function create()
     {
-        return view('createPizza');
+        return view('especialidade.create');
     }
 
-    // Salvar nova PizzaModelModel no banco de dados
+    // Salvar nova Especialidade no banco de dados
     public function store(Request $request)
     {
         $request->validate([
             'nome' => 'required|string|max:255',
+            'descricao' => 'nullable|string|max:500',
         ]);
 
-        PizzaModel::create($request->all());
-        return redirect()->route('pizza.index');
+        EspecialidadeModel::create($request->all());
+        return redirect()->route('especialidade.index')->with('success', 'Especialidade criada com sucesso!');
     }
 
-
-
-    // Atualizar dados da PizzaModel
+    // Atualizar dados da Especialidade
     public function update(Request $request, $id)
     {
         $request->validate([
             'nome' => 'required|string|max:255',
+            'descricao' => 'nullable|string|max:500',
         ]);
 
-        $pizza = PizzaModel::findOrFail($id);
-        $pizza->update($request->all());
-        return redirect()->route('pizza.index');
+        $especialidade = EspecialidadeModel::findOrFail($id);
+        $especialidade->update($request->all());
+        return redirect()->route('especialidade.index')->with('success', 'Especialidade atualizada com sucesso!');
     }
 
-    // Remover uma PizzaModel
+    // Remover uma Especialidade
     public function destroy($id)
     {
-        $pizza = PizzaModel::findOrFail($id);
-        $pizza->delete();
-        return redirect()->route('pizza.index');
+        $especialidade = EspecialidadeModel::findOrFail($id);
+        $especialidade->delete();
+        return redirect()->route('especialidade.index')->with('success', 'Especialidade removida com sucesso!');
     }
 }
