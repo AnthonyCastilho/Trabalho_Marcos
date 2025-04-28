@@ -66,7 +66,6 @@
         let firstItem = container.querySelector('.consulta-item');
         let clone = firstItem.cloneNode(true);
 
-        // Resetando valores do clone
         clone.querySelectorAll('select, input').forEach(el => {
             if (el.tagName === 'SELECT') el.selectedIndex = 0;
             if (el.tagName === 'INPUT') el.value = 1;
@@ -84,7 +83,6 @@
         }
     });
 
-    // Atualiza o campo "Nome do Paciente" com o nome selecionado
     document.getElementById('paciente_id').addEventListener('change', function() {
         var pacienteNome = this.options[this.selectedIndex].getAttribute('data-nome');
         document.getElementById('nome').value = pacienteNome;
