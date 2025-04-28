@@ -2,52 +2,67 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\PacienteModel;
+use App\Models\Paciente;
 use Illuminate\Http\Request;
 
-class ControllerPaciente extends Controller
+class PacienteController extends Controller
 {
-    public readonly pacienteModel $paciente;
-    
-    public function __construct(){
-        $this->paciente = new pacienteModel();
-
+    public function __construct(Paciente $paciente)
+    {
+        $this->paciente = $paciente;
     }
-    public function index(){
-        $paciente_=$this->paciente->all();
-        return view('pacienteIndex',['paciente_tb'=>$paciente_]);
-    
-        }
+
+    public function index()
+    {
+        $pacientes = $this->paciente->all();
+        return view('paciente.index', ['pacientes' => $pacientes]);
+    }
 
     public function create()
     {
-        return view('pacienteCreate');
+        return view('paciente.create');
     }
 
     public function store(Request $request)
     {
-        pacienteModel::create($request->all());
-        return redirect()->route('paciente.index')->with('success', 'paciente criado com sucesso.');
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'telefone' => 'nullable|string|max:15',
+            'endereco' => 'nullable|string',
+            'data_nascimento' => 'nullable|date',
+            'email' => 'nullable|email|max:255',
+        ]);
+
+        Paciente::create($request->all());
+        return redirect()->route('pacientes.index')->with('success', 'Paciente criado com sucesso.');
     }
 
     public function edit($id)
     {
-        $paciente = pacienteModel::findOrFail($id);
-        return view('pacienteEdit', compact('paciente'));
+        $paciente = Paciente::findOrFail($id);
+        return view('paciente.edit', compact('paciente'));
     }
 
     public function update(Request $request, $id)
     {
-        $paciente = pacienteModel::findOrFail($id);
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'telefone' => 'nullable|string|max:15',
+            'endereco' => 'nullable|string',
+            'data_nascimento' => 'nullable|date',
+            'email' => 'nullable|email|max:255',
+        ]);
+
+        $paciente = Paciente::findOrFail($id);
         $paciente->update($request->all());
-        return redirect()->route('paciente.index')->with('success', 'paciente atualizado.');
+        return redirect()->route('pacientes.index')->with('success', 'Paciente atualizado com sucesso.');
     }
 
     public function destroy($id)
     {
-        $paciente = pacienteModel::findOrFail($id);
+        $paciente = Paciente::findOrFail($id);
         $paciente->delete();
-        return redirect()->route('paciente.index')->with('success', 'paciente removido.');
+        return redirect()->route('pacientes.index')->with('success', 'Paciente removido com sucesso.');
     }
 }
+
