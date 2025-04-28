@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-    <h2>Novo Cliente</h2>
+    <h2>Novo Paciente</h2>
 
-    <form method="POST" action="{{ route('cliente.store') }}">
+    <form method="POST" action="{{ route('paciente.store') }}">
         @csrf
 
         <div class="form-group mb-3">
@@ -17,8 +17,8 @@
             <input type="text" name="telefone" class="form-control">
         </div>
 
-        <button type="submit" class="btn btn-primary">Salvar Cliente</button>
-        <a href="{{ route('cliente.index') }}" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Salvar Paciente</button>
+        <a href="{{ route('Paciente.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
 @endsection
